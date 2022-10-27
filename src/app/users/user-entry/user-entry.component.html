@@ -1,0 +1,92 @@
+<p>user-entry works!</p>
+<form name="userForm" #form="ngForm" autocomplete="off" (ngSubmit)="onSubmit(form)">
+
+
+    <!-- uSER iD autogenerate -->
+    <input type="hidden" name="userId" [(ngModel)]="usersService.formUserData.userId">
+    <!-- username -->
+    <div class="form-group">
+        <label>User Name:</label>
+        <input name="userName" #userName="ngModel" [(ngModel)]="usersService.formUserData.userName" class="form-control"
+            placeholder="Enter User Name" minlength="6" maxlength="25" required
+            [ngClass]="{'is-invalid': userName.touched && userName.invalid}" />
+
+        <div class="validation-error" *ngIf="userName.touched && userName.invalid">
+            <div *ngIf="userName.errors.required">
+                UserName is required
+            </div>
+            <div *ngIf="userName.errors.minlength">
+                minimum 6 characters is required
+            </div>
+
+        </div>
+    </div>
+    <!-- userpassword -->
+    <div class="form-group">
+        <label>Password:</label>
+        <input name="password" #password="ngModel" [(ngModel)]="usersService.formUserData.password" class="form-control"
+            placeholder="Enter User Password" minlength="6" maxlength="25" required
+            [ngClass]="{'is-invalid': password.touched && password.invalid}" />
+
+        <div class="validation-error" *ngIf="password.touched && password.invalid">
+            <div *ngIf="password.errors.required">
+                Password is required
+            </div>
+        </div>
+    </div>
+    <!-- userfullname -->
+    <div class="form-group">
+        <label>fullName:</label>
+        <input name="fullName" #fullName="ngModel" [(ngModel)]="usersService.formUserData.fullName" class="form-control"
+            placeholder="Enter User fullName" minlength="6" maxlength="25" required
+            [ngClass]="{'is-invalid': fullName.touched && fullName.invalid}" />
+
+        <div class="validation-error" *ngIf="fullName.touched && fullName.invalid">
+            <div *ngIf="fullName.errors.required">
+                fullName is required
+            </div>
+        </div>
+    </div>
+
+    <!-- roleid rolename -->
+    <div class="form-group">
+        <label >Role</label>
+        <select name="roleId" id="roleId" class="form-control" #roleId="ngModel" required
+            [(ngModel)]="usersService.formUserData.role.roleId">
+            <option value=0 disabled>Choose Role</option>
+            <option *ngFor="let role of usersService.roles" value="{{role.roleId}}">
+                {{role.roleName}}
+            </option>
+
+        </select>
+        <div class="validation-error" *ngIf="roleId.touched && roleId.invalid">
+            <div *ngIf="roleId.errors.required">
+                RoleId is required
+            </div>
+        </div>
+    </div>
+    <!-- isActive -->
+
+    <div class="form-group">
+        <div class="form-check">
+            <label class="form-check-label">Is Active</label>
+            <input type="checkbox" name="active" id="active" #active="ngModel" 
+            [(ngModel)]="usersService.formUserData.active"
+            class="form-check-input">
+        </div>
+    </div>
+    <!-- button for submit-->
+    <br>
+    <div class="form-group">
+        <button type="submit" class="btn btn-lg btn-primary form-control"
+        [disabled]="!(form.valid && form.dirty)">
+            Submit
+        </button>&nbsp;
+        <button type="reset" class="btn btn-lg btn-secondary form-control">
+            Clear
+        </button>
+    </div>
+
+
+
+</form>

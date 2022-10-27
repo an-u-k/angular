@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+div.validation-error{
+    font-size: 80%;
+    color: #dd3535;
+    
+}
+
+
+table tbody tr:hover{
+    background-color: rgb(119, 129, 129);
+    cursor: pointer;
+}
